@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad Verde - Crowdfunding Ecológico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --light-green: #4caf50;
+            --dark-green: #1b5e20;
+            --accent-green: #81c784;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --background-light: #f5f5f5;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            border-bottom: 2px solid var(--accent-green);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--light-green);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-large {
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-green);
+            font-size: 2rem;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .category {
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .category:hover, .category.active {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--light-green);
+            border-radius: 4px;
+        }
+
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-green);
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .form-link {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-link:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-image-large {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .project-image-large img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-meta-detail {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            padding: 0.5rem 1rem;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .support-option {
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .support-option:hover {
+            border-color: var(--light-green);
+            box-shadow: var(--card-shadow);
+        }
+
+        .support-option.selected {
+            border-color: var(--primary-green);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .support-option .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-amount {
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .amount-input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .updates-section {
+            margin-top: 3rem;
+        }
+
+        .update-item {
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            color: var(--text-light);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--text-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--primary-green);
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-option {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            border-color: var(--light-green);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary-green);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 0.75rem 0.5rem;
+            }
+
+            .auth-buttons {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            .support-options {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .categories {
+                gap: 0.5rem;
+            }
+
+            .category {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .current-page {
+            display: block;
+        }
+
+        .other-page {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showPage('home')">
+                    <span class="logo-icon">🌱</span>
+                    <span>Comunidad Verde</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active" onclick="showPage('home')">Inicio</a></li>
+                        <li><a href="#" onclick="showPage('projects')">Proyectos</a></li>
+                        <li><a href="#" onclick="showPage('project-detail')">Detalles</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-secondary" onclick="showPage('login')">Iniciar Sesión</a>
+                    <a href="#" class="btn btn-primary" onclick="showPage('register')">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="current-page">
+        <div class="hero">
+            <div class="container">
+                <h1>Financia proyectos que cambian el mundo</h1>
+                <p>Conectamos ideas ecológicas y sostenibles con personas que quieren marcar la diferencia. Únete a nuestra comunidad y apoya proyectos con impacto positivo.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary btn-large" onclick="showPage('projects')">Explorar Proyectos</a>
+                    <a href="#" class="btn btn-secondary btn-large" onclick="showPage('register')">Crear Proyecto</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2 class="section-title">Categorías de Proyectos</h2>
+                <div class="categories">
+                    <div class="category active">Todos</div>
+                    <div class="category">Reforestación</div>
+                    <div class="category">Energía Renovable</div>
+                    <div class="category">Limpieza</div>
+                    <div class="category">Agricultura Urbana</div>
+                    <div class="category">Tecnología Verde</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2 class="section-title">Proyectos Destacados</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1570804439973-9a2dfa2e2f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Reforestación" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Bosques Vivos: Reforestación de 10,000 árboles</h3>
+                            <p class="project-description">Proyecto de reforestación en áreas afectadas por incendios forestales en la región amazónica.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Reforestación</span>
+                                <span>18 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 56.7%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $8,500</span>
+                                <span>Meta: $15,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551828043-6db8c0d1247e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energía Solar" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Energía Solar para Comunidades Rurales</h3>
+                            <p class="project-description">Instalación de paneles solares en comunidades aisladas sin acceso a la red eléctrica.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Energía</span>
+                                <span>32 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 42%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $12,600</span>
+                                <span>Meta: $30,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1589923188659-1b15713c62e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Limpieza de Playas" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Limpieza de Playas Caribeñas</h3>
+                            <p class="project-description">Campaña de limpieza y concientización en playas del Caribe afectadas por contaminación plástica.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Limpieza</span>
+                                <span>10 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $8,500</span>
+                                <span>Meta: $10,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="other-page">
+        <div class="section">
+            <div class="container">
+                <h2 class="section-title">Explorar Proyectos</h2>
+                
+                <div class="categories">
+                    <div class="category active">Todos</div>
+                    <div class="category">Reforestación</div>
+                    <div class="category">Energía Renovable</div>
+                    <div class="category">Limpieza</div>
+                    <div class="category">Agricultura Urbana</div>
+                    <div class="category">Tecnología Verde</div>
+                    <div class="category">Educación Ambiental</div>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1570804439973-9a2dfa2e2f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Reforestación" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Bosques Vivos: Reforestación</h3>
+                            <p class="project-description">Proyecto de reforestación en áreas afectadas por incendios forestales.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Reforestación</span>
+                                <span>18 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 56.7%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $8,500</span>
+                                <span>Meta: $15,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551828043-6db8c0d1247e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energía Solar" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Energía Solar Comunitaria</h3>
+                            <p class="project-description">Instalación de paneles solares en comunidades rurales.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Energía</span>
+                                <span>32 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 42%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $12,600</span>
+                                <span>Meta: $30,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1589923188659-1b15713c62e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Limpieza de Playas" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Limpieza de Playas</h3>
+                            <p class="project-description">Campaña de limpieza en playas del Caribe afectadas por contaminación.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Limpieza</span>
+                                <span>10 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $8,500</span>
+                                <span>Meta: $10,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Huertos Urbanos" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Huertos Urbanos Comunitarios</h3>
+                            <p class="project-description">Creación de huertos comunitarios en espacios urbanos subutilizados.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Agricultura</span>
+                                <span>25 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 65%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $6,500</span>
+                                <span>Meta: $10,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Reciclaje Inteligente" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Reciclaje Inteligente</h3>
+                            <p class="project-description">Sistema de reciclaje inteligente para comunidades urbanas.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Tecnología</span>
+                                <span>40 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 35%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $7,000</span>
+                                <span>Meta: $20,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Educación Ambiental" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-title">Educación Ambiental Escolar</h3>
+                            <p class="project-description">Programa de educación ambiental para escuelas primarias.</p>
+                            <div class="project-meta">
+                                <span>Categoría: Educación</span>
+                                <span>15 días restantes</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 78%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span>Recaudado: $7,800</span>
+                                <span>Meta: $10,000</span>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="width: 100%;" onclick="showPage('project-detail')">Apoyar Proyecto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-detail" class="other-page">
+        <div class="section">
+            <div class="container">
+                <div class="project-header">
+                    <div class="project-image-large">
+                        <img src="https://images.unsplash.com/photo-1570804439973-9a2dfa2e2f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bosques Vivos">
+                    </div>
+                    <div class="project-info">
+                        <h1 class="section-title" style="text-align: left; margin-bottom: 1rem;">Bosques Vivos: Reforestación de 10,000 árboles</h1>
+                        <p class="project-description" style="font-size: 1.1rem;">Proyecto de reforestación en áreas afectadas por incendios forestales en la región amazónica. Buscamos recuperar 50 hectáreas de bosque nativo mediante la plantación de especies autóctonas y la implementación de sistemas de monitoreo para garantizar el crecimiento y supervivencia de los árboles.</p>
+                        
+                        <div class="project-meta-detail">
+                            <div class="meta-item">Categoría: Reforestación</div>
+                            <div class="meta-item">Ubicación: Amazonas, Brasil</div>
+                            <div class="meta-item">18 días restantes</div>
+                        </div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 56.7%"></div>
+                        </div>
+                        <div class="project-stats">
+                            <span>Recaudado: $8,500</span>
+                            <span>Meta: $15,000</span>
+                            <span>125 apoyos</span>
+                        </div>
+                        
+                        <a href="#" class="btn btn-primary btn-large" style="margin-top: 1rem;" onclick="openDonationModal()">Apoyar este Proyecto</a>
+                    </div>
+                </div>
+
+                <div class="support-options">
+                    <div class="support-option" onclick="selectSupportOption(this, 10)">
+                        <div class="amount">$10</div>
+                        <h3>Agradecimiento Digital</h3>
+                        <p>Tu nombre en nuestra página de agradecimientos</p>
+                    </div>
+                    
+                    <div class="support-option" onclick="selectSupportOption(this, 25)">
+                        <div class="amount">$25</div>
+                        <h3>Certificado de Adopción</h3>
+                        <p>Certificado digital + fotos de la plantación</p>
+                    </div>
+                    
+                    <div class="support-option" onclick="selectSupportOption(this, 50)">
+                        <div class="amount">$50</div>
+                        <h3>Kit Ecológico</h3>
+                        <p>Camiseta ecológica + certificado de 2 árboles</p>
+                    </div>
+                    
+                    <div class="support-option selected" onclick="selectSupportOption(this, 100)">
+                        <div class="amount">$100</div>
+                        <h3>Experiencia Completa</h3>
+                        <p>Visita guiada + kit ecológico + mención especial</p>
+                    </div>
+                </div>
+
+                <div class="custom-amount">
+                    <h3>¿Quieres donar más?</h3>
+                    <p>Ingresa el monto que deseas aportar y recibirás la recompensa máxima disponible</p>
+                    <input type="number" class="amount-input" placeholder="Ej: 250" min="101" value="101">
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;"><strong>Recompensa máxima:</strong> Visita guiada + kit ecológico + mención especial como benefactor</p>
+                    <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="openDonationModal()">Donar monto personalizado</a>
+                </div>
+
+                <div class="updates-section">
+                    <h2 class="section-title" style="text-align: left;">Actualizaciones del Proyecto</h2>
+                    
+                    <div class="update-item">
+                        <h3>Primera semana de plantación</h3>
+                        <p>Hemos comenzado con la plantación de los primeros 500 árboles en la zona norte del área designada. Los voluntarios locales han mostrado un gran entusiasmo y compromiso con el proyecto.</p>
+                        <div class="project-meta">
+                            <span>Publicado: 15 de marzo, 2023</span>
+                        </div>
+                    </div>
+                    
+                    <div class="update-item">
+                        <h3>¡Meta del 50% alcanzada!</h3>
+                        <p>Gracias a todos los apoyos, hemos alcanzado la mitad de nuestra meta de financiamiento. Esto nos permitirá adquirir los primeros 5,000 árboles y el equipo necesario para la plantación.</p>
+                        <div class="project-meta">
+                            <span>Publicado: 5 de marzo, 2023</span>
+                        </div>
+                    </div>
+                    
+                    <div class="update-item">
+                        <h3>Alianza con comunidad local</h3>
+                        <p>Hemos establecido una alianza con la comunidad indígena local que nos ayudará a identificar las especies nativas más adecuadas para la reforestación y participará en el proceso de plantación.</p>
+                        <div class="project-meta">
+                            <span>Publicado: 20 de febrero, 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="other-page">
+        <div class="section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="form-title">Crear Cuenta</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirmar contraseña</label>
+                            <input type="password" id="confirm-password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">Acepto los <a href="#" class="form-link">términos y condiciones</a></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">Registrarse</button>
+                        <div class="form-footer">
+                            <p>¿Ya tienes una cuenta? <a href="#" class="form-link" onclick="showPage('login')">Inicia sesión aquí</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="login" class="other-page">
+        <div class="section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="form-title">Iniciar Sesión</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Correo electrónico</label>
+                            <input type="email" id="login-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Contraseña</label>
+                            <input type="password" id="login-password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Mantener sesión iniciada</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">Iniciar Sesión</button>
+                        <div class="form-footer">
+                            <p>¿Olvidaste tu contraseña? <a href="#" class="form-link">Recupérala aquí</a></p>
+                            <p>¿No tienes una cuenta? <a href="#" class="form-link" onclick="showPage('register')">Regístrate aquí</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Comunidad Verde</h3>
+                    <p>Plataforma de crowdfunding especializada en proyectos ecológicos, sostenibles y de impacto social positivo.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')">Inicio</a></li>
+                        <li><a href="#" onclick="showPage('projects')">Proyectos</a></li>
+                        <li><a href="#" onclick="showPage('register')">Registrarse</a></li>
+                        <li><a href="#" onclick="showPage('login')">Iniciar Sesión</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#">Reforestación</a></li>
+                        <li><a href="#">Energía renovable</a></li>
+                        <li><a href="#">Limpieza</a></li>
+                        <li><a href="#">Agricultura urbana</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Email: info@comunidadverde.org</li>
+                        <li>Teléfono: +1 234 567 890</li>
+                        <li>Dirección: Calle Ecológica 123, Ciudad Verde</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Comunidad Verde. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="donationModal">
+        <div class="modal-content">
+            <div class="modal-title">Confirmar Donación</div>
+            
+            <div class="form-group">
+                <label>Monto a donar:</label>
+                <div class="form-control" id="selectedAmount">$100</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Recompensa:</label>
+                <div class="form-control" id="selectedReward">Visita guiada al área de reforestación + kit ecológico</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Método de pago:</label>
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPaymentOption(this)">Tarjeta</div>
+                    <div class="payment-option" onclick="selectPaymentOption(this)">PayPal</div>
+                    <div class="payment-option" onclick="selectPaymentOption(this)">Transferencia</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary submit-btn" onclick="confirmDonation()">Confirmar Donación</button>
+            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="closeDonationModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedAmount = 100;
+        let selectedReward = "Visita guiada al área de reforestación + kit ecológico";
+        
+        function showPage(pageId) {
+            document.querySelectorAll('section').forEach(page => {
+                page.classList.remove('current-page');
+                page.classList.add('other-page');
+            });
+            
+            document.getElementById(pageId).classList.remove('other-page');
+            document.getElementById(pageId).classList.add('current-page');
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (pageId === 'home' || pageId === 'projects' || pageId === 'project-detail') {
+                const activeLink = document.querySelector(`nav a[onclick="showPage('${pageId}')"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+            
+            window.scrollTo(0, 0);
+        }
+        
+        function selectSupportOption(element, amount) {
+            document.querySelectorAll('.support-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedAmount = amount;
+            
+            if (amount === 10) {
+                selectedReward = "Agradecimiento digital y tu nombre en la página del proyecto";
+            } else if (amount === 25) {
+                selectedReward = "Certificado de adopción de un árbol + fotos de la plantación";
+            } else if (amount === 50) {
+                selectedReward = "Camiseta ecológica + certificado de adopción de 2 árboles";
+            } else {
+                selectedReward = "Visita guiada al área de reforestación + kit ecológico";
+            }
+        }
+        
+        function openDonationModal() {
+            const customAmountInput = document.querySelector('.amount-input');
+            if (customAmountInput && parseInt(customAmountInput.value) > 100) {
+                selectedAmount = parseInt(customAmountInput.value);
+                selectedReward = "Visita guiada + kit ecológico + mención especial como benefactor";
+            }
+            
+            document.getElementById('selectedAmount').textContent = '$' + selectedAmount;
+            document.getElementById('selectedReward').textContent = selectedReward;
+            document.getElementById('donationModal').style.display = 'flex';
+        }
+        
+        function closeDonationModal() {
+            document.getElementById('donationModal').style.display = 'none';
+        }
+        
+        function selectPaymentOption(element) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+        }
+        
+        function confirmDonation() {
+            alert('¡Donación de $' + selectedAmount + ' confirmada! Gracias por tu apoyo.');
+            closeDonationModal();
+        }
+        
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            alert('Registro exitoso. ¡Bienvenido a Comunidad Verde!');
+            this.reset();
+            showPage('home');
+        });
+        
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Inicio de sesión exitoso');
+            this.reset();
+            showPage('home');
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const hundredOption = document.querySelector('.support-option:nth-child(4)');
+            if (hundredOption) {
+                hundredOption.classList.add('selected');
+            }
+            
+            document.querySelectorAll('.category').forEach(category => {
+                category.addEventListener('click', function() {
+                    document.querySelectorAll('.category').forEach(c => {
+                        c.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
